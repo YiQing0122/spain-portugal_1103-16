@@ -132,6 +132,7 @@ details.acc .in{padding:0 16px 14px}
 .hcard .n{font-weight:700;color:var(--azul-deep)}
 :root[data-theme="dark"] .hcard .n{color:var(--azul)}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .hcard .n{color:var(--azul)}}
+.l a{color:var(--azul);font-weight:600;overflow-wrap:anywhere}
 .hcard .a{font-size:13.5px;overflow-wrap:anywhere}
 .sight{border-left:3px solid var(--gold);padding:2px 0 2px 12px;margin:10px 0}
 .sight .sn{font:700 16px var(--serif);color:var(--azul)}
@@ -343,6 +344,41 @@ function dayMeals(tag){
   });
   return h+'</ul><p class="note">全程清真餐。完整菜單在「須知」分頁。</p></div>';
 }
+/* ---- 延伸導覽 ---- */
+var YT='https://www.youtube.com/watch?v=';
+var DEEP={
+D2:[['貝倫塔與傑若米修道院','貝倫塔建於 16 世紀初，原為守衛特茹河口的堡壘，也是大航海船隊出發與返航的象徵；傑若米修道院則是曼努埃爾式建築代表作，石柱、迴廊上的航海繩索與珊瑚紋飾，正是大航海時代財富的縮影。兩處皆列世界遺產。']],
+D3:[['佩納宮','19 世紀國王斐迪南二世以山頂修道院廢墟改建的浪漫主義宮殿，黃、紅、藍外牆混搭摩爾、哥德與曼努埃爾風格。霧天視野較差，建議以拍近景細節為主。'],['艾芙拉','城內羅馬神廟（約 1 世紀）是伊比利半島保存最完整的羅馬遺跡之一；教堂旁的人骨禮拜堂以修士遺骨為牆，旨在提醒世人生命無常。']],
+D4:[['阿卡薩宮殿','由摩爾王宮演進為基督教國王的宮殿，融合穆德哈爾式建築，庭院的水、灰泥雕花與彩瓷磚是看點。若大教堂與吉拉達塔門票不足，領隊已備案改入此處。'],['西班牙廣場','1929 年伊比利亞美洲博覽會的建築，半圓形長廊以磁磚彩繪呈現西班牙各省歷史場景，適合找自己家鄉省分合影。']],
+D5:[['阿爾罕布拉宮','13–14 世紀納斯里王朝的宮城，精華在納斯里宮殿：獅子庭院、香桃木庭院與滿牆的幾何灰泥雕飾，象徵伊斯蘭世界對天堂花園的想像。夏宮花園（赫內拉利費）以水渠與花圃著稱，需留足走動時間。'],['格拉納達皇家禮拜堂','天主教雙王（伊莎貝拉與斐迪南）的長眠之地，1492 年收復格拉納達後興建，可與阿爾罕布拉宮對照，理解兩種文明交會的歷史。']],
+D6:[['哥多華清真寺','建於 8 世紀末，歷經數代擴建，以雙層馬蹄形紅白拱門構成的柱林聞名；16 世紀在中央加建大教堂，形成清真寺與教堂合一的罕見空間。請留意祈禱壁龕（米哈拉布）的金色馬賽克。'],['百花巷與猶太人區','白牆窄巷與花盆是安達盧西亞庭院文化的縮影；猶太人區曾是中世紀學術與貿易重鎮，邁蒙尼德（Maimonides）出生於此。']],
+D7:[['孔蘇埃格拉風車村','山丘上的白色風車源自 16 世紀的磨麥設施，因《唐吉軻德》而成為文學地標。旁有城堡遺址，視野極佳，風大請留意帽子與保暖。'],['托雷多大教堂','哥德式大教堂始建於 1226 年，歷時兩個多世紀完成。托雷多舊城整體列世界遺產，曾是基督、猶太、穆斯林三種文化並存之城。']],
+D8:[['阿維拉城牆','11–12 世紀興建，周長約 2.5 公里、有 80 餘座塔樓，是歐洲保存最完整的中世紀城牆之一。登牆步道可俯瞰舊城，路面石階請穿防滑鞋。'],['塞哥維亞羅馬水道橋','約 1 世紀興建，以未用灰漿的花崗岩石塊堆砌，全長約 800 公尺、最高約 28 公尺，至今仍是城市地標，建議後退到廣場拍整體。']],
+D9:[['馬德里皇宮','18 世紀波旁王朝興建，擁有逾 3,000 個房間，為歐洲最大的現存皇宮之一，現多用於國家典禮。王座廳、御用餐廳與宮廷收藏是亮點。'],['普拉多美術館','館藏以西班牙皇室收藏為基礎，核心名作包括委拉斯奎茲《宮女》、哥雅《5 月 3 日的槍殺》與波希《人間樂園》。時間有限時可鎖定這三件。']],
+D10:[['西班牙高鐵 AVE','馬德里—巴塞隆納約 2.5 小時，最高時速約 300 公里，沿途穿越卡斯蒂亞高原乾燥的麥田與橄欖樹，接近薩拉戈薩一帶可見埃布羅河谷地。上車前須過安檢，行李尺寸與擺放規定請以領隊說明為準。']],
+D11:[['聖家堂','高第自 1883 年接手，畢生投入至 1926 年去世，工程持續超過一個世紀。重點是誕生立面的自然雕刻、受難立面的稜角線條，與室內如森林般的樹形柱列及彩色玻璃光影。'],['米拉之家與巴特由之家','兩者皆為高第的住宅作品：巴特由之家外牆如海洋與龍背，米拉之家以石材波浪外觀聞名，屋頂煙囪造型別具一格。']],
+D12:[['蒙朱伊克山丘','1929 年萬國博覽會與 1992 年奧運會舉辦地，山頂可眺望港口與市區；加泰隆尼亞國家藝術博物館收藏羅馬式壁畫，為全球重要收藏。']]
+};
+var LINKS={
+D2:[['貝倫塔／熱羅尼莫斯修道院（影音）',YT+'dd8qBjWYLDo','v'],['貝倫塔（影音）',YT+'eEbZLSqs5ME','v'],['里斯本一日遊重點（影音）',YT+'SOJTY8UOSaI','v']],
+D3:[['佩納宮：Rick Steves 導覽（影音）',YT+'thmHjNvi2MM','v'],['佩納宮內部實拍（影音）',YT+'NMeJzACuIK0','v'],['辛特拉官方購票與資訊','https://www.parquesdesintra.pt/en/buy-tickets/','s'],['埃武拉小鎮（影音）',YT+'4d2uclFi2Qk','v'],['人骨禮拜堂（影音）',YT+'r4uc3D_vjfk','v']],
+D4:[['塞維亞阿卡薩官方網站','https://alcazarsevilla.org/en/','s'],['西維爾經典景點（影音）',YT+'bDOuIT_ca5k','v'],['塞維亞主教堂（影音）',YT+'c_bxWfcyORQ','v'],['西班牙廣場（影音）',YT+'URXzlpbt6ms','v']],
+D5:[['阿爾罕布拉宮官方購票','https://tickets.alhambra-patronato.es/en/','s'],['阿爾罕布拉宮必看 4 大看點（影音）',YT+'9tXNsObdTCE','v'],['獅子庭院・香桃木院（影音）',YT+'8y67g-O4vDU','v'],['神秘阿爾罕布拉宮（影音）',YT+'mvAkZTPQh8Q','v'],['洞穴佛朗明哥（影音）',YT+'8ee03tBfgKg','v'],['聖尼古拉斯觀景台（影音）',YT+'JxorPl37qgY','v']],
+D6:[['哥多華清真寺官方票務','https://www.mezquita-catedraldecordoba.es/en/organiza-la-visita/entradas-y-horarios/','s'],['如何參觀清真寺（影音）',YT+'Cz_6IhXBVRU','v'],['一路向西：哥多華（影音）',YT+'IRVDLhQuR5Y','v'],['哥多華：回教統治的首都（影音）',YT+'YwzmhI84bDY','v']],
+D7:[['托雷多世界遺產（影音）',YT+'c13j4HLZLfQ','v'],['托雷多：清真寺・猶太會堂・大教堂（影音）',YT+'MVC5d_z7aQo','v'],['托雷多白色風車村與唐吉軻德（影音）',YT+'Sq_zGlgGjM8','v'],['拉曼查風車村與小酒館（影音）',YT+'Y31iJA-hALM','v']],
+D8:[['阿維拉城牆（影音）',YT+'mSZprEj_V5I','v'],['塞哥維亞水道橋（影音）',YT+'FbLPXicdsVM','v'],['塞哥維亞交通與景點（影音）',YT+'qdhH1vnVa5Q','v']],
+D9:[['馬德里皇宮完整導覽（影音）',YT+'hhFkX65aVmI','v'],['王宮・太陽門・哥倫布廣場（影音）',YT+'CAKlAphPaE8','v'],['普拉多必看五大名作（影音）',YT+'8eU0qmAj60c','v'],['普拉多精華（影音）',YT+'rZre_X8Uk7o','v'],['普拉多半日遊（影音）',YT+'VCWNOl-g968','v']],
+D10:[['巴塞隆納—馬德里高鐵（影音）',YT+'AsIb52c6Ias','v'],['馬德里—巴塞隆納不停站（影音）',YT+'lVzAaxOFhWc','v'],['高鐵駕駛艙視角（影音）',YT+'1lbIdHCs6SE','v']],
+D11:[['聖家堂官方 App 與導覽','https://sagradafamilia.org/en/app-oficial','s'],['聖家堂：上帝的建築師（影音）',YT+'ek5J0tkDIbU','v'],['高第四大名作（影音）',YT+'oKFcIO9a9p8','v'],['奎爾公園・米拉之家（影音）',YT+'ulh3jXIguwE','v'],['奎爾公園官方購票','https://parkguell.barcelona/en/buy-tickets','s']],
+D12:[['加泰隆尼亞國家藝術博物館（影音）',YT+'uwt7cUCUBNU','v'],['蒙朱伊克山丘 4K（影音）',YT+'ut86saDPKEc','v']]
+};
+function deepLinks(tag){
+  var h='',dp=DEEP[tag]||[],lk=LINKS[tag]||[];
+  if(dp.length){h+='<div class="blk"><div class="t">深度導讀</div>'+dp.map(function(a){return '<div class="sight"><div class="sn">'+esc(a[0])+'</div><p>'+esc(a[1])+'</p></div>'}).join('')+'</div>'}
+  if(lk.length){h+='<div class="blk"><div class="t">官方連結・影音導覽</div><ul class="l">'+lk.map(function(a){return '<li><a href="'+esc(a[1])+'" target="_blank" rel="noopener">'+(a[2]==='v'?'▶ ':'🔗 ')+esc(a[0])+'</a></li>'}).join('')+'</ul><div class="a" style="font-size:12px;opacity:.75;margin-top:6px">▶ 為網路旅遊影片，非官方導覽，內容以現場公告與領隊說明為準；建議連上 Wi-Fi 再觀看。</div></div>'}
+  return h;
+}
+/* ---- end 延伸導覽 ---- */
 function drawDay(){
   var d=DAYS[selDay];
   var key=d.tag, rg=TEMPS[key];
@@ -351,6 +387,7 @@ function drawDay(){
   if(rg){var pct=function(v){return (v/24*100).toFixed(1)};h+='<div class="gauge"><i style="left:'+pct(rg[0])+'%;right:'+(100-pct(rg[1]))+'%"></i></div><div class="gauge-l"><span>0°C</span><span>'+esc(RANGE[key]||'')+'</span><span>24°C</span></div>'}
   h+='</div>';
   if(d.attr&&d.attr.length){h+='<div class="blk"><div class="t">景點導覽</div>'+d.attr.map(function(a){return '<div class="sight"><div class="sn">'+esc(a[0])+'</div><p>'+esc(a[1])+'</p><p><b class="lk">看點</b>'+esc(a[2])+'</p><p><b class="tp">小撇步</b>'+esc(a[3])+'</p></div>'}).join('')+'</div>'}
+  h+=deepLinks(d.tag);
   h+='<div class="blk"><div class="t">行程提醒</div><ul class="l">'+d.notes.map(function(x){var w=x.charAt(0)==='!';return '<li class="'+(w?'warn':'')+'">'+esc(w?x.slice(1):x)+'</li>'}).join('')+'</ul></div>';
   h+=dayMeals(d.tag);
   if(d.hotel){h+='<div class="blk"><div class="t">下榻酒店</div><div class="hcard"><div class="n">'+esc(d.hotel[0])+'</div><div class="a">'+esc(d.hotel[1])+'</div><div class="a">TEL '+esc(d.hotel[2])+'</div><div class="row" style="margin-top:8px"><button class="btn sm" data-show="'+d.tag+'">給司機看</button><button class="btn sm" data-copy="'+esc(d.hotel[0]+', '+d.hotel[1])+'">複製地址</button><button class="btn sm" data-copy="'+esc(d.hotel[2])+'">複製電話</button></div></div>'+(HN[d.tag]?'<details class="acc" open style="margin-top:10px"><summary>酒店特色、優缺點、周邊採購</summary><div class="in">'+hotelRows(HN[d.tag])+'</div></details>':'')+'</div>'}
@@ -438,3 +475,4 @@ if(location.hash&&pages[location.hash.slice(1)])showTab(location.hash.slice(1));
 
 </body>
 </html>
+
